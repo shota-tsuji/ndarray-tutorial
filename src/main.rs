@@ -3,11 +3,11 @@ use ndarray_linalg::{error, random, Solve};
 
 fn main() {
     let mat1 = arr2(&[
-        [4., -17],
-        [15, -4],
-        [30, -7],
-        [100, 50],
-        [200, 70],
+        [4., -17.],
+        [15., -4.],
+        [30., -7.],
+        [100., 50.],
+        [200., 70.],
     ]);
 
     let (v_x, v_y) = mat1.view().split_at(Axis(1), 1);
