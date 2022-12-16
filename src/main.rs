@@ -13,7 +13,7 @@ fn main() {
     let (v_x, v_y) = mat1.view().split_at(Axis(1), 1);
     let a_11 = v_x.mapv(|v: f64| v.powf(2.)).sum();
     let a_12 = v_x.sum();
-    let a_22 = v_x.mapv(|_| 1).sum();
+    let a_22 = v_x.mapv(|_| 1.).sum();
 
     let b_1 = v_x.iter().zip(v_y.iter()).map(|(x, y)| x * y).sum();
     let b_2 = v_y.sum();
