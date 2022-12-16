@@ -1,5 +1,4 @@
-use ndarray::prelude::*;
-use ndarray::Array;
+use ndarray::*;
 use ndarray_linalg::*;
 
 fn main() {
@@ -19,10 +18,10 @@ fn main() {
     let b_1 = v_x.iter().zip(v_y.iter()).map(|(x, y)| x * y).sum();
     let b_2 = v_y.sum();
 
-    let mat_a = array![
+    let mat_a = arr2(&[
         [a_11, a_12],
         [a_12, a_22],
-    ];
+    ]);
     println!("{}", mat_a);
 
     let v_b = array![
