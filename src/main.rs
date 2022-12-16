@@ -1,5 +1,5 @@
-use ndarray::*;
-use ndarray_linalg::*;
+use ndarray::{arr2, array, Array1, Array2, Axis};
+use ndarray_linalg::{error, random, Solve};
 
 fn main() {
     let mat1 = arr2(&[
@@ -11,14 +11,14 @@ fn main() {
     ]);
 
     let (v_x, v_y) = mat1.view().split_at(Axis(1), 1);
-    let a_11 = v_x.mapv(|v: i32| v.pow(2)).sum();
+    let a_11 = v_x.mapv(|v: f64| v.powf(2.)).sum();
     let a_12 = v_x.sum();
     let a_22 = v_x.mapv(|_| 1).sum();
 
     let b_1 = v_x.iter().zip(v_y.iter()).map(|(x, y)| x * y).sum();
     let b_2 = v_y.sum();
 
-    let mat_a = arr2(&[
+    let mat_a: Array2<f64> = arr2(&[
         [a_11, a_12],
         [a_12, a_22],
     ]);
@@ -29,8 +29,8 @@ fn main() {
     ];
     println!("{}", v_b);
 
-    //let x = mat_a.solve(&v_b).unwrap();
-    //println!("{}", x);
+    let x = mat_a.solve(&v_b).unwrap();
+    println!("{}", x);
 
     solve().unwrap();
 }
