@@ -1,9 +1,9 @@
-use ndarray::{arr2, array, Array1, Array2, Axis};
+use ndarray::{arr1, arr2, array, Array1, Array2, Axis};
 use ndarray_linalg::{error, random, Solve};
 
 fn main() {
     let mat1 = arr2(&[
-        [4, -17],
+        [4., -17],
         [15, -4],
         [30, -7],
         [100, 50],
@@ -24,9 +24,7 @@ fn main() {
     ]);
     println!("{}", mat_a);
 
-    let v_b = array![
-        [b_1, b_2]
-    ];
+    let v_b = arr1(&[b_1, b_2]);
     println!("{}", v_b);
 
     let x = mat_a.solve(&v_b).unwrap();
