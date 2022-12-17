@@ -46,9 +46,10 @@ fn main() {
     );
 
     let mut precision = Vec::new();
-    Zip::from( v_x.clone().to_shape(((v_x.len()), Order::RowMajor)).unwrap())
+    let v_x =  v_x.clone().to_shape(((v_x.len()), Order::RowMajor)).unwrap().view();
+    Zip::from(v_x)
         .and(&precision_y)
-        .for_each(|x, &y| precision.push((x, y)));
+        .for_each(|&x, &y| precision.push((x, y)));
     let l1 = Plot::new(precision).line_style(
         LineStyle::new()
             .colour("burlywood")
