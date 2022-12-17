@@ -1,4 +1,4 @@
-use ndarray::{arr1, arr2, array, Array1, Array2, Axis};
+use ndarray::{arr1, arr2, array, Array1, Array2, Axis, Zip};
 use ndarray_linalg::{error, random, Solve};
 use plotlib::page::Page;
 use plotlib::repr::Plot;
@@ -48,9 +48,11 @@ fn main() {
             .marker(PointMarker::Square)
             .colour("#DD3355"),
     );*/
+    let mut data1 = Vec::new();
+    Zip::from(v_x)
+        .and(v_y)
+        .for_each(|&x, &y| data1.push((x, y)));
 
-    let data1 = mat1.clone().outer_iter().collect();
-    //let data2 = vec![(-1.4, 2.5), (7.2, -0.3)];
     let s1: Plot = Plot::new(data1).point_style(
         PointStyle::new().colour("#35C788")
     );
