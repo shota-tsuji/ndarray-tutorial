@@ -7,4 +7,5 @@ edition = "2021"
 
 [dependencies]
 ndarray = "0.15"
-ndarray-linalg = { version = "0.16.0", features = ["openblas-static"] }
+ndarray-linalg = { version = "0.16.0", features = ["openblas-system"] }
+plotlib = "0.5.1"
