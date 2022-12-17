@@ -30,14 +30,4 @@ fn main() {
     let x = mat_a.solve(&v_b).unwrap();
     println!("{}", x);
 
-    solve().unwrap();
-}
-
-// Solve `Ax=b`
-fn solve() -> Result<(), error::LinalgError> {
-    let a: Array2<f64> = random((3, 3));
-    let b: Array1<f64> = random(3);
-    let _x = a.solve(&b)?;
-    println!("{}", _x);
-    Ok(())
 }
