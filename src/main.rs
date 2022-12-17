@@ -46,7 +46,7 @@ fn main() {
     );
 
     let mut precision = Vec::new();
-    Zip::from(v_x.to_shape(((v_x.len()), Order::RowMajor)).unwrap())
+    Zip::from(&mut v_x.to_shape(((v_x.len()), Order::RowMajor)).unwrap())
         .and(&precision_y)
         .for_each(|&x, &y| precision.push((x, y)));
     let l1 = Plot::new(precision).line_style(
