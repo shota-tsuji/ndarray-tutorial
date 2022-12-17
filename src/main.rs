@@ -34,7 +34,7 @@ fn main() {
     let x = mat_a.solve(&v_b).unwrap();
     println!("{}", x);
 
-    let data1 = [
+    let data1 = vec![
         (-3.0, 2.3),
         (-1.6, 5.3),
         (0.3, 0.7),
