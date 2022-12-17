@@ -1,8 +1,8 @@
-use ndarray::{arr1, arr2, array, Array1, Array2, Axis, Zip};
+use ndarray::{arr1, arr2, array, Array1, Array2, ArrayView, Axis, Zip};
 use ndarray_linalg::{error, random, Solve};
 use plotlib::page::Page;
 use plotlib::repr::Plot;
-use plotlib::style::{PointMarker, PointStyle};
+use plotlib::style::{LineJoin, LineStyle, PointMarker, PointStyle};
 use plotlib::view::ContinuousView;
 
 fn main() {
@@ -31,23 +31,11 @@ fn main() {
     let v_b = arr1(&[b_1, b_2]);
     println!("{}", v_b);
 
-    let x = mat_a.solve(&v_b).unwrap();
-    println!("{}", x);
+    let coefficient_x = mat_a.solve(&v_b).unwrap();
+    println!("{}", coefficient_x);
 
-    /*let data1 = vec![
-        (-3.0, 2.3),
-        (-1.6, 5.3),
-        (0.3, 0.7),
-        (4.3, -1.4),
-        (6.4, 4.3),
-        (8.5, 3.7),
-    ];*/
+    let precision_y = v_x.map(|&x| f(coefficient_x[0], coefficient_x[1], x)).into_raw_vec();
 
-    /*let s1: Plot = Plot::new(data1).point_style(
-        PointStyle::new()
-            .marker(PointMarker::Square)
-            .colour("#DD3355"),
-    );*/
     let mut data1 = Vec::new();
     Zip::from(v_x)
         .and(v_y)
@@ -57,12 +45,27 @@ fn main() {
         PointStyle::new().colour("#35C788")
     );
 
+    let mut precision = Vec::new();
+    Zip::from(v_x)
+        .and(&precision_y)
+        .for_each(|&x, &y| precision.push((x, y)));
+    let l1 = Plot::new(precision).line_style(
+        LineStyle::new()
+            .colour("burlywood")
+            .linejoin(LineJoin::Round)
+    );
+
     let v = ContinuousView::new()
         .add(s1)
+        .add(l1)
         .x_range(0., 230.)
         .y_range(-30., 100.)
         .x_label("x label")
         .y_label("y label");
 
     Page::single(&v).save("scatter.svg").unwrap();
+}
+
+fn f(a: f64, b: f64, x: f64) -> f64 {
+    a * x + b
 }
