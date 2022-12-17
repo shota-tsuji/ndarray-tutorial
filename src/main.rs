@@ -49,7 +49,7 @@ fn main() {
             .colour("#DD3355"),
     );*/
 
-    let data1 = mat1.clone().iter().collect();
+    let data1 = mat1.clone().map(|&x| x).iter().collect();
     //let data2 = vec![(-1.4, 2.5), (7.2, -0.3)];
     let s1: Plot = Plot::new(data1).point_style(
         PointStyle::new().colour("#35C788")
