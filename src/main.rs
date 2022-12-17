@@ -46,7 +46,8 @@ fn main() {
     );
 
     let mut precision = Vec::new();
-    let v_x =  v_x.to_shape(((v_x.len()), Order::RowMajor)).unwrap().view();
+    let tmp = v_x.to_shape(((v_x.len()), Order::RowMajor)).unwrap();
+    let v_x =  tmp.view();
     Zip::from(v_x)
         .and(&precision_y)
         .for_each(|&x, &y| precision.push((x, y)));
