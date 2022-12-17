@@ -1,4 +1,4 @@
-use ndarray::{arr1, arr2, array, Array1, Array2, ArrayView, Axis, Zip};
+use ndarray::{arr1, arr2, array, Array1, Array2, ArrayView, Axis, Order, Zip};
 use ndarray_linalg::{error, random, Solve};
 use plotlib::page::Page;
 use plotlib::repr::Plot;
@@ -46,7 +46,7 @@ fn main() {
     );
 
     let mut precision = Vec::new();
-    Zip::from(v_x)
+    Zip::from(v_x.to_shape(((v_x.len()), Order::RowMajor)).unwrap())
         .and(&precision_y)
         .for_each(|&x, &y| precision.push((x, y)));
     let l1 = Plot::new(precision).line_style(
