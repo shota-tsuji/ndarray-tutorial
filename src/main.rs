@@ -34,31 +34,31 @@ fn main() {
     let x = mat_a.solve(&v_b).unwrap();
     println!("{}", x);
 
-    let data1 = vec![
+    /*let data1 = vec![
         (-3.0, 2.3),
         (-1.6, 5.3),
         (0.3, 0.7),
         (4.3, -1.4),
         (6.4, 4.3),
         (8.5, 3.7),
-    ];
+    ];*/
 
-    let s1: Plot = Plot::new(data1).point_style(
+    /*let s1: Plot = Plot::new(data1).point_style(
         PointStyle::new()
             .marker(PointMarker::Square)
             .colour("#DD3355"),
-    );
+    );*/
 
-    let data2 = vec![(-1.4, 2.5), (7.2, -0.3)];
-    let s2: Plot = Plot::new(data2).point_style(
+    let data1 = mat1.clone().iter().collect();
+    //let data2 = vec![(-1.4, 2.5), (7.2, -0.3)];
+    let s1: Plot = Plot::new(data1).point_style(
         PointStyle::new().colour("#35C788")
     );
 
     let v = ContinuousView::new()
         .add(s1)
-        .add(s2)
-        .x_range(-5., 10.)
-        .y_range(-2., 6.)
+        .x_range(0., 230.)
+        .y_range(-30., 100.)
         .x_label("x label")
         .y_label("y label");
 
